@@ -36,7 +36,7 @@ export class PostagemService {
         titulo: ILike(`%${titulo}%`)
       }
       
-    });
+    })
   }  
 
 
