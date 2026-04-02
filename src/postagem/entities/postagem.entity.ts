@@ -1,5 +1,6 @@
 import { IsNotEmpty } from "class-validator";
-import { Column, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Tema } from "../../tema/entities/tema.entity";
 
 @Entity({name: "tb_postagem"}) //Cria uma tabela chamada tb_postagem
 export class Postagem{
@@ -17,4 +18,11 @@ export class Postagem{
 
   @UpdateDateColumn() //Cria uma coluna do tipo data, que é atualizada automaticamente toda vez que a entidade é atualizada
   data!: Date;
+
+  @ManyToOne(() => Tema, (tema) => tema.postagem, {
+    onDelete: "CASCADE" //Cria um relacionamento muitos para um com a entidade Tema, onde uma postagem pode ter apenas um tema, mas um tema pode ter várias postagens. O parâmetro eager: true indica que o tema relacionado deve ser carregado automaticamente quando a postagem for carregada.
+  })
+  
+tema: Tema;
+
 }
