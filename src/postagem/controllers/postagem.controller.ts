@@ -1,7 +1,9 @@
+import { JwtAuthGuard } from '../../auth/guard/jwt-auth.guard';
 import { Postagem } from '../entities/postagem.entity'
 import { PostagemService } from './../services/postagem.service'
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put } from '@nestjs/common'
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put, UseGuards } from '@nestjs/common'
 
+@UseGuards(JwtAuthGuard) //protege todas as rotas do controller, ou seja, para acessar qualquer rota do controller, o usuário precisa estar logado, ou seja, precisa ter um token válido
 @Controller('/postagens')
 export class PostagemController {
   postagemRepository: any;
